@@ -7,6 +7,7 @@ namespace ChroDoom.Engine.WAD
     public class Wad
     {
         public WadType Type;
+        public Lump[] Directory;
         
         public static Wad LoadFromFile(string path)
         {
@@ -21,6 +22,10 @@ namespace ChroDoom.Engine.WAD
             if (magic is not "IWAD" or "PWAD")
                 throw new NotWadException();
             wad.Type = magic is "IWAD" ? WadType.Internal : WadType.Patch;
+
+            wad.Directory = new Lump[reader.ReadUInt32()];
+            var directoryOffset = reader.ReadUInt32();
+            reader.BaseStream.Seek(directoryOffset, SeekOrigin.Begin);
 
             return wad;
         }
