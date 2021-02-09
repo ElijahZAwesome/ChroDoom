@@ -1,7 +1,10 @@
 ﻿namespace ChroDoom.Engine.WAD
 {
-    public class Lump
+    public struct Lump
     {
-        
+        public string Name;
+        public int Offset;
+        public int Size => Data.Length;
+        public byte[] Data;
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using ChroDoom.Engine.WAD;
 using Chroma;
 using Chroma.Diagnostics.Logging;
 using Chroma.Graphics;
@@ -8,10 +9,12 @@ namespace ChroDoom
 {
     internal class GameCore : Game
     {
-        private Log Log { get; } = LogManager.GetForCurrentAssembly();
+        public static Log Log { get; } = LogManager.GetForCurrentAssembly();
 
         internal GameCore()
         {
+            Log.Info(Environment.CurrentDirectory);
+            var test = Wad.LoadFromFile(@"../../../WADs/DOOM.WAD");
             Log.Info("Hello, world!");
         }
 
